@@ -1,4 +1,4 @@
-# mARker project repository
+# marker project repository
 
 ## Tablet of content
 - [Installation](#Installation)
@@ -8,7 +8,7 @@
 # Installation
 1. Clone the project
 ```
-  git clone https://github.com/eddsanity/mARker.git
+  git clone https://github.com/eddsanity/marker.git
 ```
 2. Launch Android Studio
 3. Open An Existing Project
@@ -16,7 +16,7 @@
 OR,
 1. Launch Android Studio
 2. "Get from Version Control"
-3. URL: https://github.com/eddsanity/mARker.git
+3. URL: https://github.com/eddsanity/marker.git
 
 # Documentation
 Documentation is automatically generated using Android Studio's [*javadoc*](https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html) tool integration.
