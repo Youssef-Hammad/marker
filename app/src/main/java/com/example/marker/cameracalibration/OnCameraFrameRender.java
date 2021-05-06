@@ -55,8 +55,8 @@ class CalibrationFrameRender extends FrameRender {
 /**
  * This class renders undistorted frames
  */
-class UndistortedFrameRender extends FrameRender {
-    public UndistortedFrameRender(CameraCalibrator pCamCalibrator) {
+class UndistortionFrameRender extends FrameRender {
+    public UndistortionFrameRender(CameraCalibrator pCamCalibrator) {
         mCalibrator = pCamCalibrator;
     }
 
