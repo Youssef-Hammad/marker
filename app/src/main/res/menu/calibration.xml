@@ -5,19 +5,5 @@
         <item android:id="@+id/calibrate"
             android:title="@string/action_calibrate"
             app:showAsAction="ifRoom|withText" />
-        <item android:id="@+id/preview_mode"
-            android:title="@string/preview_mode">
-            <menu>
-                <group android:checkableBehavior="single">
-                    <item android:id="@+id/calibration"
-                        android:title="@string/calibration"
-                        android:checked="true" />
-                    <item android:id="@+id/undistortion"
-                        android:title="@string/undistortion" />
-                    <item android:id="@+id/comparison"
-                        android:title="@string/comparison" />
-                </group>
-            </menu>
-        </item>
     </group>
 </menu>

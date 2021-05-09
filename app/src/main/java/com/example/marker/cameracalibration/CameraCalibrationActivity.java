@@ -25,14 +25,14 @@ import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
-import com.example.marker.cameracalibration.FrameRender;
+import com.example.marker.cameracalibration.CalibrationFrameRender;
 
 public class CameraCalibrationActivity extends AppCompatActivity implements View.OnTouchListener, CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String TAG = "CamCalibrationActivity";
 
     private CameraBridgeViewBase mCameraView;
     private CameraCalibrator mCalibrator;
-    private OnCameraFrameRender mOnCameraFrameRender;
+    private CalibrationFrameRender mOnCameraFrameRender;
     private int mWidth;
     private int mHeight;
 
@@ -88,47 +88,9 @@ public class CameraCalibrationActivity extends AppCompatActivity implements View
         mCameraView.setCvCameraViewListener(this);
     }
 
-    /**
-     * Inflates the calibration menu
-     * @param menu
-     * @return true
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.calibration, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.preview_mode).setEnabled(true);
-        if(!mCalibrator.isCalibrated())
-            menu.findItem(R.id.preview_mode).setEnabled(false);
-
-        return true;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.calibration:
-                mOnCameraFrameRender =
-                        new OnCameraFrameRender(new CalibrationFrameRender(mCalibrator));
-                item.setChecked(true);
-                return true;
-            case R.id.undistortion:
-                mOnCameraFrameRender =
-                        new OnCameraFrameRender(new UndistortionFrameRender(mCalibrator));
-                item.setChecked(true);
-                return true;
-            case R.id.comparison:
-                mOnCameraFrameRender =
-                        new OnCameraFrameRender(new ComparisonFrameRender(mCalibrator, mWidth, mHeight, getResources()));
-                item.setChecked(true);
-                return true;
             case R.id.calibrate:
                 final Resources res = getResources();
                 if (mCalibrator.getCornersBufferSize() < 2) {
@@ -136,8 +98,7 @@ public class CameraCalibrationActivity extends AppCompatActivity implements View
                     return true;
                 }
 
-                mOnCameraFrameRender = new OnCameraFrameRender(new PreviewFrameRender());
-                new AsyncTask<Void, Void, Void>() {
+                final AsyncTask<Void, Void, Void> execCalibrate = new AsyncTask<Void, Void, Void>() {
                     private ProgressDialog calibrationProgress;
 
                     @Override
@@ -160,9 +121,9 @@ public class CameraCalibrationActivity extends AppCompatActivity implements View
                     protected void onPostExecute(Void result) {
                         calibrationProgress.dismiss();
                         mCalibrator.clearCorners();
-                        mOnCameraFrameRender = new OnCameraFrameRender(new CalibrationFrameRender(mCalibrator));
+                        mOnCameraFrameRender = new CalibrationFrameRender(mCalibrator);
                         String resultMessage = (mCalibrator.isCalibrated()) ?
-                                res.getString(R.string.calibration_successful)  + " " + mCalibrator.getAvgReprojectionError() :
+                                res.getString(R.string.calibration_successful) + " " + mCalibrator.getAvgReprojectionError() :
                                 res.getString(R.string.calibration_unsuccessful);
                         (Toast.makeText(CameraCalibrationActivity.this, resultMessage, Toast.LENGTH_SHORT)).show();
 
@@ -211,7 +172,6 @@ public class CameraCalibrationActivity extends AppCompatActivity implements View
             mCameraView.disableView();
     }
 
-
     @Override
     public void onCameraViewStarted(int width, int height) {
         if (mWidth != width || mHeight != height) {
@@ -222,7 +182,7 @@ public class CameraCalibrationActivity extends AppCompatActivity implements View
                 mCalibrator.setCalibrated();
             }
 
-            mOnCameraFrameRender = new OnCameraFrameRender(new CalibrationFrameRender(mCalibrator));
+            mOnCameraFrameRender = new CalibrationFrameRender(mCalibrator);
         }
     }
 
