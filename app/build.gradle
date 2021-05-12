@@ -4,11 +4,16 @@ plugins {
 
 android {
     lintOptions {
+        checkReleaseBuilds false
         abortOnError false
     }
 
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+
+    lintOptions {
+        abortOnError false
+    }
 
     defaultConfig {
         applicationId "com.example.marker"
@@ -30,6 +35,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 dependencies {
