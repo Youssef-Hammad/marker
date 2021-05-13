@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MARker">
         <activity android:name=".cameracalibration.CameraCalibrationActivity"></activity>
+        <activity android:name=".markerDetection.MarkerDetectionActivity"></activity>
         <activity
             android:name=".HomeActivity"
             android:label="Home" />

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.marker.cameracalibration.CameraCalibrationActivity;
+import com.example.marker.markerDetection.MarkerDetectionActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -71,6 +72,8 @@ public class HomeActivity extends AppCompatActivity {
      */
     public void launchViewMarkersActivity() {
         Log.i("activity", "Launched View Markers Activity");
+        Intent intent = new Intent(this, MarkerDetectionActivity.class);
+        startActivity(intent);
     }
 
     /**

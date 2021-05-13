@@ -97,6 +97,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.105"
-        tools:srcCompat="@drawable/icon_with_text_trimmed" />
+        android:src="@drawable/icon_with_text_trimmed" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
