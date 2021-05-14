@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.marker.cameracalibration.CameraCalibrationActivity;
+import com.example.marker.codescanner.CodeScannerActivity;
 import com.example.marker.markerDetection.MarkerDetectionActivity;
 
 public class HomeActivity extends AppCompatActivity {
@@ -81,6 +82,8 @@ public class HomeActivity extends AppCompatActivity {
      */
     public void launchQRCodeActivity() {
         Log.i("activity", "Launched QR Code Scanner Activity");
+        Intent intent = new Intent(this, CodeScannerActivity.class);
+        startActivity(intent);
     }
 
     /**

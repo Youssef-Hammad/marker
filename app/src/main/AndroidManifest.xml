@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MARker">
+        <activity android:name=".codescanner.CodeScannerActivity"></activity>
         <activity android:name=".cameracalibration.CameraCalibrationActivity"></activity>
         <activity android:name=".markerDetection.MarkerDetectionActivity"></activity>
         <activity
