@@ -100,7 +100,16 @@ public class MarkerDetector {
 
             for(int i=0; i<ids.size().height; i++)
             {
-                MarkerData newMarker = new MarkerData(rvecs.row(i), tvecs.row(i), corners.get(i), (int)ids.get(i, 0)[0]);
+                double[] rvecArray = new double[]{
+                        rvecs.get(i , 0)[0],
+                        rvecs.get(i , 0)[1],
+                        rvecs.get(i , 0)[2]};
+                double[] tvecArray = new double[]{
+                        tvecs.get(i , 0)[0],
+                        tvecs.get(i , 0)[1],
+                        tvecs.get(i , 0)[2]};
+
+                MarkerData newMarker = new MarkerData(rvecArray, tvecArray, corners.get(i), (int)ids.get(i, 0)[0]);
                 newDetectedMarkers.add(newMarker);
             }
         }

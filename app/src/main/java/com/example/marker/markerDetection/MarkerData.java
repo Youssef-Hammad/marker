@@ -7,7 +7,7 @@ import org.opencv.core.Mat;
  */
 public class MarkerData {
     private String TAG = "MarkerInfo";
-    private Mat rvec , tvec;
+    private double[] rvec , tvec;
     private Mat corners;
     private int id;
 
@@ -17,8 +17,8 @@ public class MarkerData {
      */
     public MarkerData()
     {
-        rvec = new Mat();
-        tvec = new Mat();
+        rvec = new double[3];
+        tvec = new double[3];
         corners = new Mat();
         id = -1;
     }
@@ -30,7 +30,7 @@ public class MarkerData {
      * @param corners
      * @param id
      */
-    public MarkerData(Mat rvec, Mat tvec, Mat corners, int id)
+    public MarkerData(double[] rvec, double[] tvec, Mat corners, int id)
     {
         this.rvec = rvec;
         this.tvec = tvec;
@@ -38,12 +38,12 @@ public class MarkerData {
         this.id = id;
     }
 
-    public Mat getRvec()
+    public double[] getRvec()
     {
         return rvec;
     }
 
-    public Mat getTvec()
+    public double[] getTvec()
     {
         return tvec;
     }

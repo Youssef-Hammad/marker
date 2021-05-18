@@ -40,18 +40,6 @@ public class MarkerDetectionActivity extends AppCompatActivity implements Camera
         }
     };
 
-    /*static
-    {
-        if(OpenCVLoader.initDebug())
-        {
-            Log.i(TAG, "OpenCV loaded successfully");
-        }
-        else
-        {
-            Log.i(TAG, "OpenCV failed to load");
-        }
-    }*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
