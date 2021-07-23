@@ -1,6 +1,10 @@
 package com.example.marker.markerDetection;
 import com.example.marker.R;
+import com.example.marker.modelLoader.ModelLoader;
+import com.example.marker.packagemanager.MarkerPackage;
+import com.example.marker.packagemanager.MarkerPackageManager;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
@@ -15,97 +19,84 @@ import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
-public class MarkerDetectionActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
-    private static final String TAG = "DetectionActivity";
-    private JavaCameraView javaCameraView;
-    private MarkerDetector markerDetector = new MarkerDetector();
-    Mat retFrame;
+import actions.Action;
+import actions.ActionBufferedCameraAR;
+import actions.ActionCalcRelativePos;
+import actions.ActionMoveCameraBuffered;
+import actions.ActionPlaceObject;
+import actions.ActionRotateCameraBuffered;
+import commands.Command;
+import geo.GeoObj;
+import gl.Color;
+import gl.CustomGLSurfaceView;
+import gl.GL1Renderer;
+import gl.GLCamera;
+import gl.GLFactory;
+import gl.scenegraph.MeshComponent;
+import gl.scenegraph.Shape;
+import gui.GuiSetup;
+import markerDetection.MarkerDetectionSetup;
+import markerDetection.MarkerObjectMap;
+import markerDetection.UnrecognizedMarkerListener;
+import system.ArActivity;
+import system.ErrorHandler;
+import system.EventManager;
+import system.Setup;
+import util.Vec;
+import util.Wrapper;
+import worldData.Obj;
+import worldData.SystemUpdater;
+import worldData.World;
 
-    BaseLoaderCallback baseLoaderCallback = new BaseLoaderCallback(this) {
-        @Override
-        public void onManagerConnected(int status) {
-            switch(status)
-            {
-                case BaseLoaderCallback.SUCCESS:
-                {
-                    javaCameraView.enableView();
-                    break;
-                }
-                default:
-                {
-                    super.onManagerConnected(status);
-                    break;
-                }
+public class MarkerDetectionActivity extends MarkerDetectionSetup {
+    private static final String TAG = "DetectionActivity";
+
+    private GLCamera camera;
+    private World world;
+    private MeshComponent[] models;
+
+    @Override
+    public UnrecognizedMarkerListener _a2_getUnrecognizedMarkerListener() {
+        return null;
+    }
+
+    @Override
+    public void _a3_registerMarkerObjects(MarkerObjectMap markerObjectMap) {
+        MarkerPackageManager manager = MarkerPackageManager.getInstance();
+        MarkerPackage markerPackage = manager.getActive();
+        if (markerPackage != null) {
+            models = new MeshComponent[markerPackage.getSize()];
+            for (int i = 0; i < markerPackage.getSize(); ++i) {
+                models[i] = new Shape();
+                markerObjectMap.put(new MarkerData(i, models[i], camera));
+                world.add(models[i]);
             }
         }
-    };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_marker_detection);
-
-        javaCameraView = (JavaCameraView)findViewById(R.id.detection_camera_view);
-        javaCameraView.setVisibility(SurfaceView.VISIBLE);
-        javaCameraView.setCvCameraViewListener(this);
     }
 
     @Override
-    public void onCameraViewStarted(int width, int height)
-    {
-        retFrame = new Mat(height, width, CvType.CV_8UC4);
+    public void _a_initFieldsIfNecessary() {
+        camera = new GLCamera(new Vec(0, 0, 10));
+        world = new World(camera);
     }
 
     @Override
-    public void onCameraViewStopped()
-    {
-        retFrame.release();
+    public void _b_addWorldsToRenderer(GL1Renderer glRenderer, GLFactory objectFactory, GeoObj currentPosition) {
+        glRenderer.addRenderElement(world);
     }
 
     @Override
-    public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
+    public void _c_addActionsToEvents(EventManager eventManager, CustomGLSurfaceView arView, SystemUpdater updater) {
 
-        markerDetector.markerDetection(inputFrame.gray());
-        retFrame = inputFrame.rgba();
-
-        if(markerDetector.detectedMarkersSize() != 0)
-            retFrame = markerDetector.drawAxis(inputFrame.gray());
-
-        Imgproc.resize(retFrame, retFrame, retFrame.size());
-        return retFrame;
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if(javaCameraView != null)
-        {
-            javaCameraView.disableView();
-        }
+    public void _d_addElementsToUpdateThread(SystemUpdater updater) {
+        updater.addObjectToUpdateCycle(world);
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        if(javaCameraView != null)
-        {
-            javaCameraView.disableView();
-        }
-    }
+    public void _e2_addElementsToGuiSetup(GuiSetup guiSetup, Activity activity) {
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(OpenCVLoader.initDebug())
-        {
-            Log.i(TAG, "OpenCV loaded successfully");
-            baseLoaderCallback.onManagerConnected(BaseLoaderCallback.SUCCESS);
-        }
-        else
-        {
-            Log.i(TAG, "OpenCV failed to load");
-            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION, this, baseLoaderCallback);
-        }
     }
 }

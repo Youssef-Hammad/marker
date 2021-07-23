@@ -3,6 +3,7 @@ package com.example.marker.packagemanager;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,12 +27,13 @@ public class PackageItemActivity extends AppCompatActivity {
 
     private MarkerPackageManager pkgManager;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_package_item);
 
-        pkgManager = new MarkerPackageManager();
+        pkgManager = MarkerPackageManager.getInstance();
 
         String pkgName = getIntent().getStringExtra("EXTRA_PACKAGE_NAME");
         Log.i("Pkg", "text in 2nd activity: "+pkgName);
@@ -40,6 +42,9 @@ public class PackageItemActivity extends AppCompatActivity {
         deleteBtn = (Button) findViewById(R.id.deleteBtn);
 
         pkgTextView.setText("Package Name: "+pkgName);
+        if(pkgManager.getActive()!=null) {
+            Log.i("viewActive","Active Package: "+pkgManager.getActive().getPackageName());
+        }
 
         activeBtn.setOnClickListener(new View.OnClickListener() {
 

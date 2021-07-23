@@ -1,0 +1,82 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+ * Project ARMarker:D:\bitstars-droidar-eee546f\ARMarker\.classpath:
+   Could not resolve source path DroidAR_src in project ARMarker: ignored. The
+   project may not compile if the given source path provided source code.
+
+
+Risky Project Location:
+-----------------------
+The tools *should* handle project locations in any directory. However,
+due to bugs, placing projects in directories containing spaces in the
+path, or characters like ", ' and &, have had issues. We're working to
+eliminate these bugs, but to save yourself headaches you may want to
+move your project to a location where this is not a problem.
+D:\Programming\Graducation Project\marker
+                          -              
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+From ARMarker:
+* Application.mk
+* BuildTools\
+* BuildTools\Build AR.launch
+* BuildTools\Build.bat
+* BuildTools\compile.sh
+From DroidAR:
+* default.properties
+* lib\
+* lib\simpleUIv2.jar
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+In DroidAR:
+* AndroidManifest.xml => droidAR\src\main\AndroidManifest.xml
+* res\ => droidAR\src\main\res\
+* src\ => droidAR\src\main\java\
+* src\actions\actionExample.uxf => droidAR\src\main\resources\actions\actionExample.uxf
+* src\commands\commands.uxf => droidAR\src\main\resources\commands\commands.uxf
+* src\gamelogic\concept.uxf => droidAR\src\main\resources\gamelogic\concept.uxf
+* src\geo\geo.uxf => droidAR\src\main\resources\geo\geo.uxf
+* src\geo\geoObjWithMeshGroup.uxf => droidAR\src\main\resources\geo\geoObjWithMeshGroup.uxf
+* src\geo\gmap.uxf => droidAR\src\main\resources\geo\gmap.uxf
+* src\gl\animations\animationConcept.uxf => droidAR\src\main\resources\gl\animations\animationConcept.uxf
+* src\gl\color picking.uxf => droidAR\src\main\resources\gl\color picking.uxf
+* src\gl\graphics overview 1.uxf => droidAR\src\main\resources\gl\graphics overview 1.uxf
+* src\gl\graphics overview 2.uxf => droidAR\src\main\resources\gl\graphics overview 2.uxf
+* src\gui\editScreen.uxf => droidAR\src\main\resources\gui\editScreen.uxf
+* src\gui\gui.uxf => droidAR\src\main\resources\gui\gui.uxf
+* src\system\inputSystem.uxf => droidAR\src\main\resources\system\inputSystem.uxf
+* src\system\inputSystem2.uxf => droidAR\src\main\resources\system\inputSystem2.uxf
+* src\system\setup.uxf => droidAR\src\main\resources\system\setup.uxf
+* src\util\util.uxf => droidAR\src\main\resources\util\util.uxf
+* src\worldData\visitor.uxf => droidAR\src\main\resources\worldData\visitor.uxf
+* src\worldData\world.uxf => droidAR\src\main\resources\worldData\world.uxf
+In ARMarker:
+* AndroidManifest.xml => aRMarker\src\main\AndroidManifest.xml
+* jni\ => aRMarker\src\main\jni\
+* res\ => aRMarker\src\main\res\
+* src\ => aRMarker\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

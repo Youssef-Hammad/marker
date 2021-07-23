@@ -4,16 +4,12 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.documentfile.provider.DocumentFile;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,12 +17,15 @@ import android.widget.Toast;
 
 import com.example.marker.cameracalibration.CameraCalibrationActivity;
 
+import com.example.marker.packagemanager.MarkerPackage;
+import com.example.marker.packagemanager.MarkerPackageManager;
 import com.example.marker.packagemanager.PackageManagerActivity;
 import com.example.marker.codescanner.CodeScannerActivity;
 import com.example.marker.markerDetection.MarkerDetectionActivity;
 
 import java.io.File;
-import java.util.Arrays;
+
+import system.ArActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -115,8 +114,16 @@ public class HomeActivity extends AppCompatActivity {
         requestCameraPermission();
         if(ContextCompat.checkSelfPermission(HomeActivity.this,Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             Log.i("activity", "Launched View Markers Activity");
-            Intent intent = new Intent(this, MarkerDetectionActivity.class);
-            startActivity(intent);
+
+            MarkerPackageManager pkgManager = MarkerPackageManager.getInstance();
+            MarkerPackage currentActivePackage = pkgManager.getActive();
+            if(currentActivePackage!=null) {
+                ArActivity.startWithSetup(HomeActivity.this, new MarkerDetectionActivity());
+            }
+            else {
+                Toast.makeText(HomeActivity.this,"No package is currently active!",Toast.LENGTH_SHORT).show();
+                //Log.i("",currentActivePackage.getPackageName());
+            }
         } else {
             Log.i("error","Permission Denied. Could not launch activity");
         }

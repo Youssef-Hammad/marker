@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 //public class MarkerPackage {
@@ -57,7 +56,8 @@ import java.util.ArrayList;
 //}
 
 public class MarkerPackage {
-    private ArrayList<String> models;
+    private String packageName;
+    private ArrayList<MarkerModel> models;
 
     /**
      * initializes the ArrayList models and populates it
@@ -68,9 +68,10 @@ public class MarkerPackage {
         Log.i("mPackage","Reached constructor");
         File cacheDir = new File(context.getExternalCacheDir().getPath());
         populateList(cacheDir.listFiles());
-        for(String path : models) {
-            Log.i("mPackage",path);
-        }
+        //Collections.sort(models);
+//        for(String path : models) {
+//            Log.i("mPackage", path);
+//        }
     }
 
     /**
@@ -85,18 +86,30 @@ public class MarkerPackage {
                 populateList(file.listFiles());
             }
             else {
-                models.add(file.getPath());
-                Log.i("mPackage","Path: "+file.getPath());
+                MarkerModel markerModel = new MarkerModel();
+                for(File modelFile : filesList) {
+                    String[] extension = modelFile.getName().split("\\.");
+                    if(extension[extension.length-1].equals("obj"))
+                        markerModel.setObj(modelFile.getPath());
+                    else if(extension[extension.length-1].equals("mtl"))
+                        markerModel.setMtl(modelFile.getPath());
+                    else
+                        markerModel.addTexture(modelFile.getPath());
+                }
+                models.add(markerModel);
+                return;
+                //models.add(file.getPath());
+                //Log.i("mPackage","Path: "+file.getPath());
             }
         }
     }
 
     /**
-     * getter for a specific path in models
+     * getter for a specific model info (paths to texture and obj)
      * @param idx
-     * @return specified path
+     * @return model info
      */
-    public String getModelPath(Integer idx) {
+    public MarkerModel getModel(Integer idx) {
         return models.get(idx);
     }
 
@@ -105,5 +118,13 @@ public class MarkerPackage {
      */
     public Integer getSize() {
         return models.size();
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
     }
 }

@@ -15,10 +15,19 @@ public class MarkerPackageManager {
     private MarkerPackage currentActivePackage;
     private PackageHandler pkgHandler;
 
-    public MarkerPackageManager() {
+
+    private static MarkerPackageManager markerPackageManager;
+
+    private MarkerPackageManager() {
         currentActivePackage = null;
         pkgHandler = new PackageHandler();
         Log.i(TAG, "Camera Calibration Activity instantiated");
+    }
+
+    public static MarkerPackageManager getInstance() {
+        if (markerPackageManager == null)
+            markerPackageManager = new MarkerPackageManager();
+        return markerPackageManager;
     }
 
     /**
@@ -29,8 +38,8 @@ public class MarkerPackageManager {
      * @param PackageName: Name of the package
      */
     @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
-    public void downloadPackage(Context context, String url, String PackageName) {
-        pkgHandler.downloadPackage(context,url,PackageName);
+    public Boolean downloadPackage(Context context, String url, String PackageName) {
+        return pkgHandler.downloadPackage(context,url,PackageName);
     }
 
     /**
@@ -43,8 +52,10 @@ public class MarkerPackageManager {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public Boolean setActive(Context context, String PackageName) throws IOException {
         Boolean success = pkgHandler.setActive(context, PackageName);
-        if(success)
+        if(success) {
             currentActivePackage = new MarkerPackage(context); //Constructor will populate the ArrayList with the models
+            currentActivePackage.setPackageName(PackageName);
+        }
         return success;
     }
 
@@ -65,6 +76,11 @@ public class MarkerPackageManager {
     public Boolean deletePackage(Context context, String PackageName) {
         //TODO
         //Check if the package to delete is the active package.
+        Boolean deleteSuccess = pkgHandler.deletePackage(context,PackageName);
+        if(deleteSuccess) {
+            if(currentActivePackage!=null && PackageName.equals(currentActivePackage.getPackageName()))
+                currentActivePackage=null;
+        }
         return pkgHandler.deletePackage(context, PackageName);
     }
 

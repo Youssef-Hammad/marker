@@ -40,7 +40,7 @@ public class PackageManagerActivity extends Activity {
         TextView noPkgFound = (TextView) findViewById(R.id.noPkgFound);
 
         path=this.getExternalFilesDir(null).getPath();
-        pkgManager = new MarkerPackageManager();
+        pkgManager = MarkerPackageManager.getInstance();
 
 //        String url = "https://dd45575cb9c7.ngrok.io/media/package/packages/mobileTest.zip";
 //        String pkgName = "mobileTest.zip";

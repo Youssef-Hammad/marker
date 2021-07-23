@@ -5,8 +5,10 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -29,7 +31,11 @@ public class PackageHandler {
      * @param PackageName: Name of the package
      */
     @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
-    public void downloadPackage(Context context, String url, String PackageName) {
+    public Boolean downloadPackage(Context context, String url, String PackageName) {
+        String[] fileChecker = url.split("\\.");
+        if(!fileChecker[fileChecker.length-1].equals("zip")) {
+            return false;
+        }
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
         request.setTitle("Package Download");
@@ -39,6 +45,7 @@ public class PackageHandler {
 
         DownloadManager manager = (DownloadManager)context.getSystemService(Context.DOWNLOAD_SERVICE);
         manager.enqueue(request);
+        return true;
     }
 
     /**
