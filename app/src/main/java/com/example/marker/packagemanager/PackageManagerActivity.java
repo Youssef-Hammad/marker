@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.marker.HomeActivity;
+import com.example.marker.Dashboard;
 import com.example.marker.R;
 
 import java.io.File;
@@ -85,7 +85,7 @@ public class PackageManagerActivity extends Activity {
     @Override
     public void onBackPressed()
     {
-        Intent intent = new Intent(PackageManagerActivity.this, HomeActivity.class);
+        Intent intent = new Intent(PackageManagerActivity.this, Dashboard.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

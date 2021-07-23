@@ -24,7 +24,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
-import com.example.marker.HomeActivity;
+import com.example.marker.Dashboard;
 import com.example.marker.R;
 import com.example.marker.packagemanager.MarkerPackageManager;
 import com.example.marker.packagemanager.PackageManagerActivity;
@@ -89,7 +89,7 @@ public class CodeScannerActivity extends AppCompatActivity {
                 if(!success) {
                     Toast.makeText(CodeScannerActivity.this,"Could not download package!",Toast.LENGTH_SHORT).show();
                 }
-                Intent intent = new Intent(CodeScannerActivity.this, HomeActivity.class);
+                Intent intent = new Intent(CodeScannerActivity.this, Dashboard.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 /*Uri uri = Uri.parse(mQRCode);

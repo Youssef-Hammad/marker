@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         {
             Log.d("OpenCv", "OpenCV loaded");
             final Handler handler = new Handler(Looper.getMainLooper());
-            Intent intent = new Intent(this, HomeActivity.class);
+            Intent intent = new Intent(this, Dashboard.class);
             handler.postDelayed(new Runnable()
             {
                 @Override
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     startActivity(intent);
                 }
-            }, 1000);
+            }, 2000);
         }
     }
 }

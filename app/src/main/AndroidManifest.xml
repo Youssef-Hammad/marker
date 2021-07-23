@@ -2,56 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.marker">
-
+    <uses-sdk android:minSdkVersion="14" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <application
-        android:usesCleartextTraffic="true"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.MARker"
-        tools:targetApi="m">
-        <activity
-            android:name=".codescanner.CodeScannerActivity"
-            android:theme="@style/Theme.MARker.NoActionBar"></activity>
-        <activity android:name=".cameracalibration.CameraCalibrationActivity"></activity>
-        <activity
-            android:name=".packagemanager.PackageManagerActivity"
-            android:label="Package Viewer"></activity>
-        <activity android:name=".packagemanager.PackageItemActivity"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"></activity>
-        <activity
-            android:name=".markerDetection.MarkerDetectionActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/Theme.MARker.NoActionBar"></activity>
-        <activity
-            android:name=".HomeActivity"
-            android:label="Home" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
-
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
         android:normalScreens="true"
         android:resizeable="true"
         android:smallScreens="true" />
-
-    <uses-sdk android:minSdkVersion="8" />
-
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -64,4 +24,37 @@
     <uses-feature
         android:name="android.hardware.camera.front.autofocus"
         android:required="false" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MARker"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+        <activity android:name=".Dashboard"></activity>
+        <activity
+            android:name=".codescanner.CodeScannerActivity"
+            android:theme="@style/Theme.MARker.NoActionBar" />
+        <activity android:name=".cameracalibration.CameraCalibrationActivity"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".packagemanager.PackageManagerActivity"
+            android:label="Package Viewer" />
+        <activity
+            android:name=".packagemanager.PackageItemActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".markerDetection.MarkerDetectionActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.MARker.NoActionBar" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
 </manifest>

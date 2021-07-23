@@ -5,4 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/splash_screen"/>
+    android:background="@drawable/gradient_background">
+
+    <ImageView
+        android:id="@+id/markerLogo"
+        android:layout_width="166dp"
+        android:layout_height="338dp"
+        android:contentDescription="MARKER's logo"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.216"
+        app:srcCompat="@drawable/icon_white_trimmed" />
+
+    <ImageView
+        android:id="@+id/markerName"
+        android:layout_width="113dp"
+        android:layout_height="48dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/markerLogo"
+        app:layout_constraintVertical_bias="0.689"
+        app:srcCompat="@drawable/marker_word" />
+</androidx.constraintlayout.widget.ConstraintLayout>
