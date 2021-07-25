@@ -92,7 +92,6 @@ public class World implements RenderableEntity, Container<RenderableEntity> {
 
 		// TODO remove the coordinate axes here:
 
-		CordinateAxis.draw(gl);
 
 		drawElements(myCamera, gl);
 

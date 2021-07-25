@@ -1,10 +1,7 @@
 package com.example.marker.codescanner;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,14 +17,14 @@ import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
+
 import com.example.marker.Dashboard;
+
 import com.example.marker.R;
 import com.example.marker.packagemanager.MarkerPackageManager;
-import com.example.marker.packagemanager.PackageManagerActivity;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.concurrent.ExecutionException;
@@ -89,6 +86,7 @@ public class CodeScannerActivity extends AppCompatActivity {
                 if(!success) {
                     Toast.makeText(CodeScannerActivity.this,"Could not download package!",Toast.LENGTH_SHORT).show();
                 }
+
                 Intent intent = new Intent(CodeScannerActivity.this, Dashboard.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

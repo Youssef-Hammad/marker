@@ -35,6 +35,7 @@ public class Dashboard extends AppCompatActivity {
     private CardView scanQRCodeBtn;
     private CardView viewPackagesBtn;
     private CardView calibrateCameraBtn;
+    private CardView discoverBtn;
 
 
     private static final int REQUEST_CAMERA=102;
@@ -49,6 +50,10 @@ public class Dashboard extends AppCompatActivity {
         renderBtn = findViewById(R.id.render_btn);
         viewPackagesBtn = findViewById(R.id.browse_pkg_btn);
         scanQRCodeBtn = findViewById(R.id.scan_qr_btn);
+        discoverBtn = findViewById(R.id.discover_btn);
+
+        discoverBtn.setEnabled(false);
+        discoverBtn.setCardBackgroundColor(Color.GRAY);
 
         calibrateCameraBtn.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
         renderBtn.setCardBackgroundColor(Color.parseColor("#FFFFFF"));

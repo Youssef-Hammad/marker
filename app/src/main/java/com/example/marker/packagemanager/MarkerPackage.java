@@ -5,6 +5,9 @@ import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 //public class MarkerPackage {
 //    private String packageName;
@@ -59,6 +62,22 @@ public class MarkerPackage {
     private String packageName;
     private ArrayList<MarkerModel> models;
 
+
+    static class ModelComparator implements Comparator<MarkerModel> {
+        @Override
+        public int compare(MarkerModel m1, MarkerModel m2) {
+            if(m1==null&&m2==null)
+                return 0;
+            if(m1==null)
+                return -1;
+            if(m2==null)
+                return 1;
+            int ret = m1.getObj().compareTo(m2.getObj());
+            return ret;
+        }
+    }
+
+
     /**
      * initializes the ArrayList models and populates it
      * @param context
@@ -68,10 +87,11 @@ public class MarkerPackage {
         Log.i("mPackage","Reached constructor");
         File cacheDir = new File(context.getExternalCacheDir().getPath());
         populateList(cacheDir.listFiles());
+        Collections.sort(models,new ModelComparator());
         //Collections.sort(models);
-//        for(String path : models) {
-//            Log.i("mPackage", path);
-//        }
+        for(MarkerModel path : models) {
+            Log.i("mPackage", path.getObj());
+        }
     }
 
     /**
