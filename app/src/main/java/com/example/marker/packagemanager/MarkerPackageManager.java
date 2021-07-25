@@ -81,7 +81,7 @@ public class MarkerPackageManager {
             if(currentActivePackage!=null && PackageName.equals(currentActivePackage.getPackageName()))
                 currentActivePackage=null;
         }
-        return pkgHandler.deletePackage(context, PackageName);
+        return deleteSuccess;
     }
 
     /**

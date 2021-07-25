@@ -103,24 +103,23 @@ public class PackageExtractor {
      * @return true if the extension is among the accepted extensions
      */
     public Boolean validExtension(String extension) {
-        return true;
-//        ArrayList<String> acceptedExtensions = new ArrayList<>();
-//        acceptedExtensions.add("obj");
-//        acceptedExtensions.add("mtl");
-////        acceptedExtensions.add("md2");
-////        acceptedExtensions.add("g3d");
-////        acceptedExtensions.add("g3dt");
-//
-//        //For testing purposes
-//        //acceptedExtensions.add("png");
-//        //acceptedExtensions.add("jpg");
-//
-//        Log.i("extract","Extension: "+extension);
-//
-//        for(int i = 0; i < acceptedExtensions.size(); i++) {
-//            if(extension.equals(acceptedExtensions.get(i)))
-//                return true;
-//        }
-//        return false;
+        ArrayList<String> acceptedExtensions = new ArrayList<>();
+        acceptedExtensions.add("obj");
+        acceptedExtensions.add("mtl");
+//        acceptedExtensions.add("md2");
+//        acceptedExtensions.add("g3d");
+//        acceptedExtensions.add("g3dt");
+
+        //For testing purposes
+        acceptedExtensions.add("png");
+        acceptedExtensions.add("jpg");
+
+        Log.i("extract","Extension: "+extension);
+
+        for(int i = 0; i < acceptedExtensions.size(); i++) {
+            if(extension.equals(acceptedExtensions.get(i)))
+                return true;
+        }
+        return false;
     }
 }

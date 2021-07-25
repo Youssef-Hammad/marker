@@ -107,16 +107,20 @@ public class MarkerPackage {
             }
             else {
                 MarkerModel markerModel = new MarkerModel();
+                Boolean containsObj = false;
                 for(File modelFile : filesList) {
                     String[] extension = modelFile.getName().split("\\.");
-                    if(extension[extension.length-1].equals("obj"))
+                    if(extension[extension.length-1].equals("obj")) {
                         markerModel.setObj(modelFile.getPath());
+                        containsObj = true;
+                    }
                     else if(extension[extension.length-1].equals("mtl"))
                         markerModel.setMtl(modelFile.getPath());
                     else
                         markerModel.addTexture(modelFile.getPath());
                 }
-                models.add(markerModel);
+                if(containsObj)
+                    models.add(markerModel);
                 return;
                 //models.add(file.getPath());
                 //Log.i("mPackage","Path: "+file.getPath());
