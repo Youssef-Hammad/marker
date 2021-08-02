@@ -4,6 +4,7 @@
 - [Installation](#Installation)
 - [Documentation](#Documentation)
 - [Coding Convention](#Coding-Convention)
+- [Preview](#Preview)
 
 # Installation
 1. Clone the project
@@ -57,3 +58,7 @@ public Image getImage(URL url, String name) {
 
 # Coding Convention
 [The Java Coding Convention](https://en.wikibooks.org/wiki/Java_Programming/Coding_conventions#:~:text=Documentation%20should%20always%20accompany%20code,final%20field%20in%20a%20class.) is used.
+
+# Preview
+![Super Heroes](https://i.ibb.co/C1frKt0/67f4292d-0cd3-45d0-98c8-db344a5ac8a2.jpg)
+![Digimon Leomon](https://i.ibb.co/fvwVsmc/44279401-fb9f-4876-ba9d-836d678c2e46.jpg)
