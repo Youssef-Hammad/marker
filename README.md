@@ -9,7 +9,7 @@
 # Installation
 1. Clone the project
 ```
-  git clone https://github.com/eddsanity/marker.git
+  git clone https://github.com/Youssef-Hammad/marker.git
 ```
 2. Launch Android Studio
 3. Open An Existing Project
