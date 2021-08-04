@@ -17,7 +17,7 @@
 OR,
 1. Launch Android Studio
 2. "Get from Version Control"
-3. URL: https://github.com/eddsanity/marker.git
+3. URL: https://github.com/Youssef-Hammad/marker.git
 
 # Documentation
 Documentation is automatically generated using Android Studio's [*javadoc*](https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html) tool integration.
